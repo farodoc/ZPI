@@ -1,0 +1,395 @@
+{
+  "dataset": {
+    "flows": 6439,
+    "classes": {
+      "Google Doc": 1221,
+      "Google Drive": 1634,
+      "Google Music": 592,
+      "Google Search": 1915,
+      "Youtube": 1077
+    },
+    "train": 5151,
+    "test": 1288,
+    "split": "hold-out 80/20, stratified",
+    "seed": 42
+  },
+  "features": {
+    "max_packets": 100,
+    "dim": 55,
+    "names": [
+      "up_size_mean",
+      "up_size_std",
+      "up_size_max",
+      "up_size_p10",
+      "up_size_p50",
+      "up_size_p90",
+      "up_size_share",
+      "up_size_log_bytes",
+      "up_size_hist_0_64",
+      "up_size_hist_64_128",
+      "up_size_hist_128_256",
+      "up_size_hist_256_512",
+      "up_size_hist_512_768",
+      "up_size_hist_768_1024",
+      "up_size_hist_1024_1200",
+      "up_size_hist_1200_1300",
+      "up_size_hist_1300_1400",
+      "up_size_hist_1400_1500",
+      "up_size_hist_1500_inf",
+      "up_iat_mean",
+      "up_iat_std",
+      "up_iat_p50",
+      "up_iat_p90",
+      "up_iat_max",
+      "down_size_mean",
+      "down_size_std",
+      "down_size_max",
+      "down_size_p10",
+      "down_size_p50",
+      "down_size_p90",
+      "down_size_share",
+      "down_size_log_bytes",
+      "down_size_hist_0_64",
+      "down_size_hist_64_128",
+      "down_size_hist_128_256",
+      "down_size_hist_256_512",
+      "down_size_hist_512_768",
+      "down_size_hist_768_1024",
+      "down_size_hist_1024_1200",
+      "down_size_hist_1200_1300",
+      "down_size_hist_1300_1400",
+      "down_size_hist_1400_1500",
+      "down_size_hist_1500_inf",
+      "down_iat_mean",
+      "down_iat_std",
+      "down_iat_p50",
+      "down_iat_p90",
+      "down_iat_max",
+      "all_iat_mean",
+      "all_iat_std",
+      "all_iat_p50",
+      "all_iat_p90",
+      "all_iat_max",
+      "log_duration",
+      "log_packets"
+    ]
+  },
+  "k_tuning": {
+    "grid": [
+      {
+        "k": 1,
+        "cv_acc_mean": 0.9846633958923847,
+        "cv_acc_std": 0.0014242850328476922,
+        "single_predict_ms": 0.5123220002860762
+      },
+      {
+        "k": 3,
+        "cv_acc_mean": 0.983692145433315,
+        "cv_acc_std": 0.003855543722360323,
+        "single_predict_ms": 0.6712774999323301
+      },
+      {
+        "k": 5,
+        "cv_acc_mean": 0.9782565705837485,
+        "cv_acc_std": 0.0036123142481851835,
+        "single_predict_ms": 0.8187389999511652
+      },
+      {
+        "k": 7,
+        "cv_acc_mean": 0.976315764692588,
+        "cv_acc_std": 0.004616795702833727,
+        "single_predict_ms": 0.7399299999815412
+      },
+      {
+        "k": 9,
+        "cv_acc_mean": 0.9741800306988221,
+        "cv_acc_std": 0.004817814746700049,
+        "single_predict_ms": 0.591087500215508
+      },
+      {
+        "k": 11,
+        "cv_acc_mean": 0.9714621491058735,
+        "cv_acc_std": 0.0041895089563219684,
+        "single_predict_ms": 0.8350859998608939
+      },
+      {
+        "k": 15,
+        "cv_acc_mean": 0.9679679451564605,
+        "cv_acc_std": 0.005133553697091964,
+        "single_predict_ms": 0.7162289999541827
+      },
+      {
+        "k": 21,
+        "cv_acc_mean": 0.966415488779863,
+        "cv_acc_std": 0.004526651417571395,
+        "single_predict_ms": 0.7424024998908862
+      },
+      {
+        "k": 31,
+        "cv_acc_mean": 0.9621442091286619,
+        "cv_acc_std": 0.0040631894282542255,
+        "single_predict_ms": 0.8833895000861958
+      },
+      {
+        "k": 51,
+        "cv_acc_mean": 0.9537952595745482,
+        "cv_acc_std": 0.0063702397233235415,
+        "single_predict_ms": 0.6824995001079515
+      }
+    ],
+    "best_cv_acc": 0.9846633958923847,
+    "chosen_k": 1
+  },
+  "k": 1,
+  "test": {
+    "accuracy": 0.9922360248447205,
+    "macro_f1": 0.9900825905563148,
+    "per_class": {
+      "Google Doc": {
+        "precision": 0.9918032786885246,
+        "recall": 0.9918032786885246,
+        "f1-score": 0.9918032786885246,
+        "support": 244.0
+      },
+      "Google Drive": {
+        "precision": 0.9969230769230769,
+        "recall": 0.9908256880733946,
+        "f1-score": 0.9938650306748467,
+        "support": 327.0
+      },
+      "Google Music": {
+        "precision": 0.9747899159663865,
+        "recall": 0.9830508474576272,
+        "f1-score": 0.9789029535864979,
+        "support": 118.0
+      },
+      "Google Search": {
+        "precision": 0.9973890339425587,
+        "recall": 0.9973890339425587,
+        "f1-score": 0.9973890339425587,
+        "support": 383.0
+      },
+      "Youtube": {
+        "precision": 0.9861751152073732,
+        "recall": 0.9907407407407407,
+        "f1-score": 0.9884526558891455,
+        "support": 216.0
+      },
+      "accuracy": 0.9922360248447205,
+      "macro avg": {
+        "precision": 0.9894160841455839,
+        "recall": 0.9907619177805691,
+        "f1-score": 0.9900825905563148,
+        "support": 1288.0
+      },
+      "weighted avg": {
+        "precision": 0.9922615536666712,
+        "recall": 0.9922360248447205,
+        "f1-score": 0.9922439341816283,
+        "support": 1288.0
+      }
+    },
+    "confusion_matrix": [
+      [
+        242,
+        1,
+        0,
+        1,
+        0
+      ],
+      [
+        2,
+        324,
+        0,
+        0,
+        1
+      ],
+      [
+        0,
+        0,
+        116,
+        0,
+        2
+      ],
+      [
+        0,
+        0,
+        1,
+        382,
+        0
+      ],
+      [
+        0,
+        0,
+        2,
+        0,
+        214
+      ]
+    ],
+    "classes": [
+      "Google Doc",
+      "Google Drive",
+      "Google Music",
+      "Google Search",
+      "Youtube"
+    ]
+  },
+  "baselines": {
+    "uniform": {
+      "accuracy": 0.21506211180124224,
+      "macro_f1": 0.20861123163103837
+    },
+    "stratified": {
+      "accuracy": 0.23680124223602483,
+      "macro_f1": 0.20860072929387047
+    },
+    "most_frequent": {
+      "accuracy": 0.297360248447205,
+      "macro_f1": 0.09168162776780371
+    }
+  },
+  "performance": {
+    "fit_seconds": 0.005920700030401349,
+    "feature_extraction_ms_per_flow": 0.3625148780872323,
+    "single_flow_latency_ms": {
+      "median": 0.7024000224191695,
+      "p95": 0.8440950216026974,
+      "p99": 0.9727050142828375,
+      "max": 1.1318999459035695
+    },
+    "batch_throughput_flows_per_s": 145844.8923332411
+  },
+  "prefix": [
+    {
+      "packets": 5,
+      "accuracy": 0.9635093167701864,
+      "stage": false
+    },
+    {
+      "packets": 10,
+      "accuracy": 0.9774844720496895,
+      "stage": true
+    },
+    {
+      "packets": 20,
+      "accuracy": 0.9805900621118012,
+      "stage": true
+    },
+    {
+      "packets": 50,
+      "accuracy": 0.9798136645962733,
+      "stage": true
+    },
+    {
+      "packets": 100,
+      "accuracy": 0.9922360248447205,
+      "stage": true
+    },
+    {
+      "packets": 200,
+      "accuracy": 0.9899068322981367,
+      "stage": false
+    },
+    {
+      "packets": 500,
+      "accuracy": 0.9914596273291926,
+      "stage": false
+    },
+    {
+      "packets": 1000,
+      "accuracy": 0.9922360248447205,
+      "stage": false
+    }
+  ],
+  "padding_attack": {
+    "pad_range": [
+      1,
+      100
+    ],
+    "repeats": 5,
+    "accuracy_mean": 0.6273291925465839,
+    "accuracy_std": 0.003771726025307791,
+    "drop_pp": 36.490683229813655,
+    "confusion_matrix": [
+      [
+        239,
+        2,
+        0,
+        3,
+        0
+      ],
+      [
+        96,
+        204,
+        0,
+        0,
+        27
+      ],
+      [
+        2,
+        0,
+        3,
+        0,
+        113
+      ],
+      [
+        14,
+        45,
+        7,
+        174,
+        143
+      ],
+      [
+        18,
+        0,
+        8,
+        0,
+        190
+      ]
+    ],
+    "sweep": [
+      {
+        "max_pad": 0,
+        "acc_clean_model": 0.9922360248447205,
+        "acc_padding_aware_model": 0.9914596273291926
+      },
+      {
+        "max_pad": 10,
+        "acc_clean_model": 0.9611801242236024,
+        "acc_padding_aware_model": 0.985248447204969
+      },
+      {
+        "max_pad": 25,
+        "acc_clean_model": 0.8408385093167702,
+        "acc_padding_aware_model": 0.9798136645962733
+      },
+      {
+        "max_pad": 50,
+        "acc_clean_model": 0.6948757763975155,
+        "acc_padding_aware_model": 0.937888198757764
+      },
+      {
+        "max_pad": 100,
+        "acc_clean_model": 0.6281055900621118,
+        "acc_padding_aware_model": 0.984472049689441
+      },
+      {
+        "max_pad": 200,
+        "acc_clean_model": 0.468944099378882,
+        "acc_padding_aware_model": 0.797360248447205
+      },
+      {
+        "max_pad": 400,
+        "acc_clean_model": 0.2422360248447205,
+        "acc_padding_aware_model": 0.2670807453416149
+      }
+    ]
+  },
+  "hypothesis_accepted": true,
+  "environment": {
+    "python": "3.14.5",
+    "sklearn": "1.9.1",
+    "platform": "Windows-11-10.0.26200-SP0",
+    "cpu": "Intel64 Family 6 Model 197 Stepping 2, GenuineIntel"
+  }
+}

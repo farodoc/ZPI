@@ -1,0 +1,62 @@
+Dane: 6439 przepływów, 5 klas: Google Doc (1221), Google Drive (1634), Google Music (592), Google Search (1915), Youtube (1077)
+Hold-out: train=5151  test=1288  (cechy z pierwszych 100 pakietów)
+Wymiar wektora cech: 55  (ekstrakcja 0.36 ms/przepływ)
+
+Dobór hiperparametru k (5-fold CV na zbiorze treningowym):
+  k= 1  CV acc = 0.9847 ± 0.0014  |  0.512 ms/wektor
+  k= 3  CV acc = 0.9837 ± 0.0039  |  0.671 ms/wektor
+  k= 5  CV acc = 0.9783 ± 0.0036  |  0.819 ms/wektor
+  k= 7  CV acc = 0.9763 ± 0.0046  |  0.740 ms/wektor
+  k= 9  CV acc = 0.9742 ± 0.0048  |  0.591 ms/wektor
+  k=11  CV acc = 0.9715 ± 0.0042  |  0.835 ms/wektor
+  k=15  CV acc = 0.9680 ± 0.0051  |  0.716 ms/wektor
+  k=21  CV acc = 0.9664 ± 0.0045  |  0.742 ms/wektor
+  k=31  CV acc = 0.9621 ± 0.0041  |  0.883 ms/wektor
+  k=51  CV acc = 0.9538 ± 0.0064  |  0.682 ms/wektor
+  => wybrane k = 1 (najmniejsze k w granicy 0.2 pp od najlepszego wyniku CV)
+
+Ewaluacja na czystym zbiorze testowym:
+  k-NN accuracy = 0.9922   macro-F1 = 0.9901
+               precision    recall  f1-score   support
+
+   Google Doc     0.9918    0.9918    0.9918       244
+ Google Drive     0.9969    0.9908    0.9939       327
+ Google Music     0.9748    0.9831    0.9789       118
+Google Search     0.9974    0.9974    0.9974       383
+      Youtube     0.9862    0.9907    0.9885       216
+
+     accuracy                         0.9922      1288
+    macro avg     0.9894    0.9908    0.9901      1288
+ weighted avg     0.9923    0.9922    0.9922      1288
+
+  Dummy (uniform      ) accuracy = 0.2151
+  Dummy (stratified   ) accuracy = 0.2368
+  Dummy (most_frequent) accuracy = 0.2974
+
+  Dokładność vs liczba pierwszych pakietów przepływu (osobny model k-NN dla każdego N):
+    N=   5: 0.9635
+    N=  10: 0.9775  (etap klasyfikatora w locie)
+    N=  20: 0.9806  (etap klasyfikatora w locie)
+    N=  50: 0.9798  (etap klasyfikatora w locie)
+    N= 100: 0.9922  (etap klasyfikatora w locie)
+    N= 200: 0.9899
+    N= 500: 0.9915
+    N=1000: 0.9922
+
+  Czas predykcji 1 przepływu: mediana 0.70 ms, p99 0.97 ms;  wsadowo 145845 przepływów/s
+
+Atak padding: +U{1..100} B do każdego pakietu testowego (5 powtórzeń):
+  accuracy po ataku = 0.6273 ± 0.0038  (spadek o 36.5 pp)
+
+  Krzywa odporności (padding U{1..X}):
+    X=  0 B: k-NN 0.9922 | k-NN z obroną 0.9915
+    X= 10 B: k-NN 0.9612 | k-NN z obroną 0.9852
+    X= 25 B: k-NN 0.8408 | k-NN z obroną 0.9798
+    X= 50 B: k-NN 0.6949 | k-NN z obroną 0.9379
+    X=100 B: k-NN 0.6281 | k-NN z obroną 0.9845
+    X=200 B: k-NN 0.4689 | k-NN z obroną 0.7974
+    X=400 B: k-NN 0.2422 | k-NN z obroną 0.2671
+
+HIPOTEZA (accuracy > 90% na czystym zbiorze testowym): POTWIERDZONA (99.22%)
+
+Zapisano: model -> models\knn.joblib, wyniki -> results
