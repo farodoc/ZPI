@@ -10,6 +10,7 @@ DEFAULT_CACHE = Path("data/flows_cache.npz")
 DEFAULT_RAW = Path("data/raw/pretraining.zip")
 DEFAULT_MODEL = Path("models/knn.joblib")
 DEFAULT_RESULTS = Path("results")
+DEFAULT_MEAN_LENGTH_RESULTS = Path("results/baseline_mean_packet_length")
 
 # Google Drive, folder 1Pvev0hJ82usPh6dWDlz7Lv8L6h3JpWhE
 DATASET_FILES = {
@@ -65,6 +66,14 @@ def cmd_train(args):
 
     run(_load_flows(args), Path(args.results), Path(args.model), max_packets=args.max_packets,
         seed=args.seed, k=args.k)
+
+
+def cmd_baseline_mean_length(args):
+    from .mean_length_experiment import run_mean_packet_length
+
+    run_mean_packet_length(_load_flows(args), Path(args.results), Path(args.model),
+                           Path(args.main_metrics) if args.main_metrics else None,
+                           max_packets=args.max_packets, seed=args.seed)
 
 
 def cmd_classify(args):
@@ -172,6 +181,17 @@ def build_parser() -> argparse.ArgumentParser:
     s.add_argument("--k", type=int, default=None, help="wymuś k (domyślnie: dobór przez CV)")
     s.add_argument("--seed", type=int, default=42)
     s.set_defaults(func=cmd_train)
+
+    s = sub.add_parser("baseline-mean-length",
+                       help="ewaluacja dummy: tylko średnia długość pakietu (osobne wyniki, bez treningu k-NN)")
+    s.add_argument("--cache", default=str(DEFAULT_CACHE))
+    s.add_argument("--model", default=str(DEFAULT_MODEL), help="model główny — tylko meta podziału testowego")
+    s.add_argument("--main-metrics", default=str(DEFAULT_RESULTS / "metrics.json"),
+                   help="metrics.json k-NN do linii odniesienia na wykresach")
+    s.add_argument("--results", default=str(DEFAULT_MEAN_LENGTH_RESULTS))
+    s.add_argument("--max-packets", type=int, default=DEFAULT_MAX_PACKETS)
+    s.add_argument("--seed", type=int, default=42)
+    s.set_defaults(func=cmd_baseline_mean_length)
 
     def monitor_opts(s):
         s.add_argument("--model", default=str(DEFAULT_MODEL))

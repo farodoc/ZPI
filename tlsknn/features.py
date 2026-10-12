@@ -61,6 +61,17 @@ def extract_many(flows, max_packets: int | None = DEFAULT_MAX_PACKETS) -> np.nda
     return np.vstack([extract(f.times, f.sizes, f.dirs, max_packets) for f in flows])
 
 
+def mean_packet_length(sizes: np.ndarray, max_packets: int | None = DEFAULT_MAX_PACKETS) -> float:
+    s = np.asarray(sizes, dtype=np.float64)
+    if max_packets:
+        s = s[:max_packets]
+    return float(s.mean()) if s.size else 0.0
+
+
+def mean_packet_length_many(flows, max_packets: int | None = DEFAULT_MAX_PACKETS) -> np.ndarray:
+    return np.array([[mean_packet_length(f.sizes, max_packets)] for f in flows], dtype=np.float64)
+
+
 def pad_sizes(sizes: np.ndarray, rng: np.random.Generator, low: int = 1, high: int = 100) -> np.ndarray:
     if high <= 0:
         return sizes
