@@ -1,0 +1,237 @@
+{
+  "classifier": "MeanPacketLengthClassifier",
+  "reference_model": "models/knn.joblib",
+  "reference_metrics": "results/metrics.json",
+  "reference": {
+    "knn_clean_accuracy": 0.9922360248447205
+  },
+  "dataset": {
+    "flows": 6439,
+    "train": 5151,
+    "test": 1288,
+    "seed": 42,
+    "split": "test_flow_names from main model meta"
+  },
+  "features": {
+    "max_packets": 100,
+    "dim": 1,
+    "name": "mean_packet_length_bytes"
+  },
+  "centroids_bytes": {
+    "Google Doc": 705.9147492323439,
+    "Google Drive": 756.8260061208875,
+    "Google Music": 917.5063080168776,
+    "Google Search": 461.88335509138386,
+    "Youtube": 915.5208013937281
+  },
+  "test": {
+    "accuracy": 0.4495341614906832,
+    "macro_f1": 0.4544925321989707,
+    "per_class": {
+      "Google Doc": {
+        "precision": 0.6322314049586777,
+        "recall": 0.6270491803278688,
+        "f1-score": 0.6296296296296297,
+        "support": 244.0
+      },
+      "Google Drive": {
+        "precision": 0.2398921832884097,
+        "recall": 0.27217125382262997,
+        "f1-score": 0.25501432664756446,
+        "support": 327.0
+      },
+      "Google Music": {
+        "precision": 0.28440366972477066,
+        "recall": 0.5254237288135594,
+        "f1-score": 0.36904761904761907,
+        "support": 118.0
+      },
+      "Google Search": {
+        "precision": 0.7672413793103449,
+        "recall": 0.46475195822454307,
+        "f1-score": 0.5788617886178862,
+        "support": 383.0
+      },
+      "Youtube": {
+        "precision": 0.4311111111111111,
+        "recall": 0.44907407407407407,
+        "f1-score": 0.4399092970521542,
+        "support": 216.0
+      },
+      "accuracy": 0.4495341614906832,
+      "macro avg": {
+        "precision": 0.4709759496786628,
+        "recall": 0.467694039052535,
+        "f1-score": 0.4544925321989707,
+        "support": 1288.0
+      },
+      "weighted avg": {
+        "precision": 0.5071756894787363,
+        "recall": 0.4495341614906832,
+        "f1-score": 0.4637355642041288,
+        "support": 1288.0
+      }
+    },
+    "confusion_matrix": [
+      [
+        153,
+        77,
+        0,
+        14,
+        0
+      ],
+      [
+        79,
+        89,
+        45,
+        40,
+        74
+      ],
+      [
+        0,
+        2,
+        62,
+        0,
+        54
+      ],
+      [
+        10,
+        195,
+        0,
+        178,
+        0
+      ],
+      [
+        0,
+        8,
+        111,
+        0,
+        97
+      ]
+    ],
+    "classes": [
+      "Google Doc",
+      "Google Drive",
+      "Google Music",
+      "Google Search",
+      "Youtube"
+    ]
+  },
+  "prefix": [
+    {
+      "packets": 5,
+      "accuracy": 0.5023291925465838
+    },
+    {
+      "packets": 10,
+      "accuracy": 0.4169254658385093
+    },
+    {
+      "packets": 20,
+      "accuracy": 0.37267080745341613
+    },
+    {
+      "packets": 50,
+      "accuracy": 0.34316770186335405
+    },
+    {
+      "packets": 100,
+      "accuracy": 0.4495341614906832
+    },
+    {
+      "packets": 200,
+      "accuracy": 0.4254658385093168
+    },
+    {
+      "packets": 500,
+      "accuracy": 0.5799689440993789
+    },
+    {
+      "packets": 1000,
+      "accuracy": 0.7422360248447205
+    }
+  ],
+  "padding_attack": {
+    "pad_range": [
+      1,
+      100
+    ],
+    "repeats": 5,
+    "accuracy_mean": 0.3355590062111801,
+    "accuracy_std": 0.0007607111002432245,
+    "confusion_matrix": [
+      [
+        36,
+        187,
+        0,
+        12,
+        9
+      ],
+      [
+        24,
+        89,
+        77,
+        29,
+        108
+      ],
+      [
+        0,
+        0,
+        114,
+        0,
+        4
+      ],
+      [
+        5,
+        164,
+        0,
+        175,
+        39
+      ],
+      [
+        0,
+        0,
+        198,
+        0,
+        18
+      ]
+    ],
+    "sweep": [
+      {
+        "max_pad": 0,
+        "acc_mean_length": 0.4495341614906832,
+        "acc_knn_ref": 0.9922360248447205
+      },
+      {
+        "max_pad": 10,
+        "acc_mean_length": 0.4386645962732919,
+        "acc_knn_ref": 0.9611801242236024
+      },
+      {
+        "max_pad": 25,
+        "acc_mean_length": 0.4355590062111801,
+        "acc_knn_ref": 0.8408385093167702
+      },
+      {
+        "max_pad": 50,
+        "acc_mean_length": 0.37577639751552794,
+        "acc_knn_ref": 0.6948757763975155
+      },
+      {
+        "max_pad": 100,
+        "acc_mean_length": 0.3338509316770186,
+        "acc_knn_ref": 0.6281055900621118
+      },
+      {
+        "max_pad": 200,
+        "acc_mean_length": 0.2919254658385093,
+        "acc_knn_ref": 0.468944099378882
+      },
+      {
+        "max_pad": 400,
+        "acc_mean_length": 0.23835403726708074,
+        "acc_knn_ref": 0.2422360248447205
+      }
+    ]
+  }
+}

@@ -103,6 +103,22 @@ def plot_prefix(ns, acc, path: Path) -> None:
     _save(fig, path)
 
 
+def plot_mean_length_padding(levels, acc, knn_ref: list[float] | None, path: Path) -> None:
+    fig, (ax,) = _fig(1, 7.5)
+    _line(ax, levels, acc, 0, "baseline: średnia długość pakietu", end_label=False)
+    if knn_ref is not None:
+        _line(ax, levels, knn_ref, 1, "k-NN (model główny, tylko odniesienie)", end_label=False)
+    ax.axhline(0.9, color=MUTED, linestyle=":", linewidth=1.2)
+    ax.annotate("próg zaliczenia 90%", (levels[-1], 0.9), xytext=(-110, 5), textcoords="offset points",
+                color=INK_2, fontsize=9)
+    _style(ax, "Baseline średniej długości pakietu: dokładność vs padding U{1..X}",
+           "padding: U{1..X} bajtów na pakiet (X)", "accuracy (zbiór testowy)")
+    ax.set_ylim(0, 1.04)
+    ax.yaxis.set_major_formatter(PCT0)
+    ax.legend(frameon=False, loc="lower left", labelcolor=INK_2, fontsize=9)
+    _save(fig, path)
+
+
 def plot_confusion(cm: np.ndarray, classes: list[str], title: str, path: Path) -> None:
     fig, ax = plt.subplots(figsize=(6.4, 5.4), facecolor=SURFACE)
     norm = cm / cm.sum(axis=1, keepdims=True).clip(min=1)

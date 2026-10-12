@@ -2,9 +2,11 @@ import os
 
 import numpy as np
 import pytest
+from sklearn.metrics import accuracy_score
 
 from tlsknn.dataset import Flow, load_cache, save_cache
-from tlsknn.features import extract, extract_many, feature_names, pad_sizes
+from tlsknn.baselines import MeanPacketLengthClassifier
+from tlsknn.features import extract, extract_many, feature_names, mean_packet_length_many, pad_sizes
 from tlsknn.model import TrafficClassifier, build_pipeline
 from tlsknn.monitor import replay
 from tlsknn.pcap import FlowTracker, flows_from_pcap, load_scapy
@@ -20,6 +22,16 @@ def synthetic_flows(n_per_class=40, seed=0):
         flows.append(Flow("web", f"w{i}", np.cumsum(rng.exponential(0.05, n)),
                           rng.integers(60, 600, n), (rng.random(n) < 0.5).astype(np.int8)))
     return flows
+
+
+def test_mean_packet_length_classifier():
+    flows = synthetic_flows(n_per_class=30)
+    y = np.array([f.label for f in flows])
+    X = mean_packet_length_many(flows, 100)
+    clf = MeanPacketLengthClassifier(100).fit(X, y)
+    pred = clf.predict(X)
+    assert pred.shape == y.shape
+    assert accuracy_score(y, pred) > 0.55
 
 
 def test_feature_vector_shape_and_finite():
